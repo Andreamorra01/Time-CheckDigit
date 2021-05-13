@@ -27,7 +27,7 @@ public class LoyaltyCard {
      * @param code
      * @return solo l'ultima cifra,ovvero checkDigit
      */
-    public int checkDigit(String code){
+    public int checkDigit(){
         int size = this.codice.length();
         int[] arrInt = new int[size];
         for (int i = 0; i < size; i++) {
@@ -58,21 +58,21 @@ public class LoyaltyCard {
      * @param code
      * @returnritorna true se il numero di carta è a 13 cifre e la 13.ma è corretta, false altrimenti.
      */
-    public boolean checkValidity(String code) {
-        int size = code.length();
+    public boolean checkValidity() {
+        int size = this.codice.length();
         if (size != 13) {
             return false;
         }else{
             int[] arrInt = new int[size];
             for (int i = 0; i < size; i++) {
-                arrInt[i] = Integer.parseInt(String.valueOf(code.charAt(i)));
+                arrInt[i] = Integer.parseInt(String.valueOf(this.codice.charAt(i)));
             }
-            int lastCifre = checkDigit(code);
+            int lastCifre = checkDigit();
             if(arrInt[12] == lastCifre) {
                 return true;
             }
         }
-            return false;
+        return false;
     }
 
 
@@ -81,10 +81,10 @@ public class LoyaltyCard {
      * @param code
      * @return il codice a 12 cifre, escluso il numero di check finale
      */
-    public CharSequence getCardNo(String code){
-        if(code.length() == 13){
+    public CharSequence getCardNo(){
+        if(this.codice.length() == 13){
             return this.codice.substring(0, this.codice.length() - 1);
-        }else if(code.length() == 12){
+        }else if(this.codice.length() == 12){
             return this.codice;
         }
         return null;
@@ -96,11 +96,11 @@ public class LoyaltyCard {
      * @return il numero di carta a 13 cifre.
      */
 
-    public String getFullCardNo(String code){
-        if(code.length() == 12){
-            return code+ checkDigit(code);
-        }else if(code.length() == 13){
-            return code;
+    public String getFullCardNo(){
+        if(this.codice.length() == 12){
+            return this.codice+ checkDigit();
+        }else if(this.codice.length() == 13){
+            return this.codice;
         }
         return null;
     }
@@ -108,13 +108,3 @@ public class LoyaltyCard {
 
 
 }
-
-
-
-
-
-
-
-
-
-
